@@ -8,7 +8,7 @@ import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import useRegisterModal from '@/hooks/useRegisterModal';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
 import Modal from './Modal';
 import Heading from '../Heading';
 import Input from '../input/Input';
@@ -26,9 +26,9 @@ const RegisterModal = (props: Props) => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
+      email: '',
       name: '',
       password: '',
-      email: '',
     },
   });
 
@@ -69,6 +69,7 @@ const RegisterModal = (props: Props) => {
       />
       <Input
         id='password'
+        type='password'
         label='Password'
         disabled={isLoading}
         register={register}
