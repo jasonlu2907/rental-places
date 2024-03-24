@@ -14,6 +14,8 @@ import Heading from '../Heading';
 import Input from '../input/Input';
 import Button from '../Button';
 
+import { signIn } from 'next-auth/react';
+
 type Props = {};
 
 const RegisterModal = (props: Props) => {
@@ -86,13 +88,13 @@ const RegisterModal = (props: Props) => {
         outline
         label='Sign In with Google'
         icon={FcGoogle}
-        onClick={() => {}} //TODO: Google authentication
+        onClick={() => signIn('google')}
       />
       <Button
         outline
         label='Sign In with GitHub'
         icon={AiFillGithub}
-        onClick={() => {}} //TODO: GitHub authentication
+        onClick={() => signIn('github')}
       />
       <div className='text-neutral-500 text-center mt-4 font-light'>
         <div className='flex flex-row justify-center items-center gap-2'>
