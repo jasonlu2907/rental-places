@@ -5,6 +5,8 @@ import Navbar from '@/app/components/navbar/Navbar';
 import Modal from '@/app/components/modal/Modal';
 import RegisterModal from '@/app/components/modal/RegisterModal';
 import ToasterProvider from '@/app/providers/ToasterProvider';
+import LoginModal from '@/app/components/modal/LoginModal';
+import getCurrentUser from './actions/getCurrentUser';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
   description: 'A clone version of Airbnb',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -25,6 +27,8 @@ export default function RootLayout({
   //   console.log('hello');
   // };
 
+  const currentUser = await getCurrentUser();
+
   return (
     <html lang='en'>
       <body className={font.className}>
@@ -34,8 +38,9 @@ export default function RootLayout({
           throw new Error('Function not implemented.');
         } } /> */}
         <ToasterProvider />
+        <LoginModal />
         <RegisterModal />
-        <Navbar />
+        <Navbar currentUser={currentUser} />
         {children}
       </body>
     </html>
