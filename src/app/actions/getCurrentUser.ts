@@ -28,9 +28,9 @@ export default async function getCurrentUser() {
 
     return {
       ...currentUser,
-      createdAt: currentUser.createdAt,
-      updatedAt: currentUser.updatedAt,
-      emailVerified: currentUser.emailVerified || null,
+      createdAt: currentUser.createdAt.toISOString(),
+      updatedAt: currentUser.updatedAt.toISOString(),
+      emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
   } catch (error: any) {
     // not an API call, just communicate w/ db through server component

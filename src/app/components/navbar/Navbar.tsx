@@ -6,9 +6,9 @@ import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
 
-import { User } from '@prisma/client';
+import { SafeUser } from '@/app/types';
 interface NavbarProps {
-  currentUser?: User | null; // User model from our prisma schemas
+  currentUser?: SafeUser | null; // User model from our prisma schemas
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
