@@ -13,6 +13,7 @@ const Logo = (props: Props) => {
       className='hidden md:block cursor-pointer'
       height='100'
       width='100'
+      priority
       src='/images/logo.png' //it automatically understands the images are in /public/images/...
     />
   );

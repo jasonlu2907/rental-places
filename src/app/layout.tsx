@@ -2,10 +2,13 @@ import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/navbar/Navbar';
+
 // import Modal from '@/app/components/modal/Modal';
 import RegisterModal from '@/components/modal/RegisterModal';
-import ToasterProvider from '@/app/providers/ToasterProvider';
 import LoginModal from '@/components/modal/LoginModal';
+import RentModal from '@/components/modal/RentModal';
+
+import ToasterProvider from '@/app/providers/ToasterProvider';
 import getCurrentUser from './actions/getCurrentUser';
 
 const font = Nunito({ subsets: ['latin'] });
@@ -20,13 +23,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const onClose = () => {
-  //   console.log('hello');
-  // };
-  // const onSubmit = () => {
-  //   console.log('hello');
-  // };
-
   const currentUser = await getCurrentUser();
 
   return (
@@ -38,6 +34,7 @@ export default async function RootLayout({
           throw new Error('Function not implemented.');
         } } /> */}
         <ToasterProvider />
+        <RentModal />
         <LoginModal />
         <RegisterModal />
         <Navbar currentUser={currentUser} />
