@@ -1,15 +1,13 @@
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/navbar/Navbar';
-
-// import Modal from '@/app/components/modal/Modal';
-import RegisterModal from '@/components/modal/RegisterModal';
-import LoginModal from '@/components/modal/LoginModal';
-import RentModal from '@/components/modal/RentModal';
-
+import Navbar from '@/app/components/navbar/Navbar';
+import RegisterModal from '@/app/components/modal/RegisterModal';
+import LoginModal from '@/app/components/modal/LoginModal';
+import RentModal from '@/app/components/modal/RentModal';
 import ToasterProvider from '@/app/providers/ToasterProvider';
-import getCurrentUser from './actions/getCurrentUser';
+import getCurrentUser from '@/app/actions/getCurrentUser';
+import ClientOnly from '@/app/components/ClientOnly';
 
 const font = Nunito({ subsets: ['latin'] });
 
@@ -28,17 +26,14 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body className={font.className}>
-        {/* <Modal actionLabel='Submit' isOpen={true} onClose={function (): void {
-          throw new Error('Function not implemented.');
-        } } onSubmit={function (): void {
-          throw new Error('Function not implemented.');
-        } } /> */}
-        <ToasterProvider />
-        <RentModal />
-        <LoginModal />
-        <RegisterModal />
-        <Navbar currentUser={currentUser} />
-        {children}
+        <ClientOnly>
+          <Navbar currentUser={currentUser} />
+          <ToasterProvider />
+          <RentModal />
+          <LoginModal />
+          <RegisterModal />
+        </ClientOnly>
+        <div className='pb-20 pt-24'>{children}</div>
       </body>
     </html>
   );
