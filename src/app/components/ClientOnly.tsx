@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
+/**This wrapper component is specialized for Hydration problem in nextjs */
 const ClientOnly = ({ children }: { children: React.ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false);
 
