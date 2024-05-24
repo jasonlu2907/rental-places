@@ -15,6 +15,7 @@ const Logo = (props: Props) => {
       width='100'
       priority
       src='/images/logo.png' //it automatically understands the images are in /public/images/...
+      onClick={() => router.push('/')}
     />
   );
 };
