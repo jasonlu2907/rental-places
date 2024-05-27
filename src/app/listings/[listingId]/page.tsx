@@ -3,7 +3,7 @@ import ListingClient from './ListingClient';
 
 import getListingById from '@/app/actions/getListingById';
 import getCurrentUser from '@/app/actions/getCurrentUser';
-import getReservation from '@/app/actions/getReservation';
+import getReservations from '@/app/actions/getReservation';
 
 interface IListing {
   listingId?: string;
@@ -13,7 +13,7 @@ interface IListing {
 const ListingPage = async ({ params }: { params: IListing }) => {
   const listing = await getListingById(params);
   const currentUser = await getCurrentUser();
-  const reservations = await getReservation(params);
+  const reservations = await getReservations(params);
 
   if (!listing) {
     return <EmptyList />;
