@@ -1,5 +1,5 @@
 import { use, useEffect, useState } from 'react';
-import getListings from './actions/getListings';
+import getListings, { IListingsParams } from './actions/getListings';
 import getCurrentUser from './actions/getCurrentUser';
 
 import ClientOnly from './components/ClientOnly';
@@ -7,9 +7,13 @@ import Container from './components/Container';
 import EmptyList from './components/EmptyList';
 import ListingCard from './components/listings/ListingCard';
 
-export default function Home() {
+interface HomeProps {
+  searchParams: IListingsParams;
+}
+
+const Home = async ({ searchParams }: HomeProps) => {
   const currentUser = use(getCurrentUser());
-  const listings = use(getListings());
+  const listings = use(getListings(searchParams));
   // console.log(listings);
 
   if (!listings) {
@@ -35,4 +39,6 @@ export default function Home() {
     </Container>
     // </ClientOnly>
   );
-}
+};
+
+export default Home;
