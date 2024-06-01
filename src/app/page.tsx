@@ -9,6 +9,9 @@ interface HomeProps {
   searchParams: IListingsParams;
 }
 
+//https://nextjs.org/docs/messages/app-static-to-dynamic-error
+export const dynamic = 'force-dynamic';
+
 const Home = async ({ searchParams }: HomeProps) => {
   const currentUser = await getCurrentUser();
   const listings = await getListings(searchParams);
@@ -23,7 +26,6 @@ const Home = async ({ searchParams }: HomeProps) => {
   }
 
   return (
-    // <ClientOnly>
     <Container>
       <div className='pt-25 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
         {listings.map((listing: any) => (
@@ -35,7 +37,6 @@ const Home = async ({ searchParams }: HomeProps) => {
         ))}
       </div>
     </Container>
-    // </ClientOnly>
   );
 };
 
