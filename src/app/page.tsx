@@ -1,8 +1,6 @@
-import { use, useEffect, useState } from 'react';
 import getListings, { IListingsParams } from './actions/getListings';
 import getCurrentUser from './actions/getCurrentUser';
 
-import ClientOnly from './components/ClientOnly';
 import Container from './components/Container';
 import EmptyList from './components/EmptyList';
 import ListingCard from './components/listings/ListingCard';
@@ -12,11 +10,11 @@ interface HomeProps {
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
-  const currentUser = use(getCurrentUser());
-  const listings = use(getListings(searchParams));
+  const currentUser = await getCurrentUser();
+  const listings = await getListings(searchParams);
   // console.log(listings);
 
-  if (!listings) {
+  if (listings.length === 0) {
     return (
       <div className=''>
         <EmptyList showReset />

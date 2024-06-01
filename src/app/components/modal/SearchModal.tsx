@@ -10,6 +10,8 @@ import useSearchModal from '@/app/hooks/useSearchModal';
 import Modal from './Modal';
 import CountrySelect, { CountrySelectValue } from '../input/CountrySelect';
 import Heading from '../Heading';
+import Calendar from '../input/Calendar';
+import Counter from '../input/Counter';
 
 enum STEPS {
   LOCATION,
@@ -48,15 +50,15 @@ const SearchModal = () => {
     setStep((value) => value + 1);
   }, []);
 
-  const onSubmit = useCallback(async () => {
+  const onSubmit = useCallback(() => {
     if (step !== STEPS.INFO) return onNext();
 
     let currentQuery = {};
 
     if (params) {
-      console.log('Params: ', params);
+      // console.log('Params: ', params);
       currentQuery = queryString.parse(params.toString());
-      console.log('Param but in string: ', currentQuery);
+      // console.log('Param but in string: ', currentQuery);
     }
 
     const updatedQuery: any = {
@@ -124,15 +126,54 @@ const SearchModal = () => {
     </div>
   );
 
+  if (step === STEPS.DATE) {
+    bodyContent = (
+      <div className='flex flex-col gap-8'>
+        <Heading title='What is your start date?' />
+        <Calendar
+          value={dateRange}
+          onChange={(value) => setDateRange(value.selection)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className='flex flex-col gap-8'>
+        <Heading title='More information' subtitle='Find your perfect place' />
+        <Counter
+          title='Guests'
+          subtitle='How many guests are there?'
+          value={guestCount}
+          onChange={(value) => setGuestCount(value)}
+        />
+        <Counter
+          title='Rooms'
+          subtitle='How many rooms?'
+          value={roomCount}
+          onChange={(value) => setRoomCount(value)}
+        />
+        <Counter
+          title='Bathrooms'
+          subtitle='What about bathrooms?'
+          value={bathroomCount}
+          onChange={(value) => setBathroomCount(value)}
+        />
+      </div>
+    );
+  }
+
   return (
     <Modal
       isOpen={searchModal.isOpen}
       onClose={searchModal.onClose}
-      onSubmit={searchModal.onOpen}
+      onSubmit={onSubmit}
       title='Filters'
       actionLabel={actionLable}
       body={bodyContent}
       secondaryActionLabel={secondaryActionLable}
+      secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
     />
   );
 };
