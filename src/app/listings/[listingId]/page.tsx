@@ -9,6 +9,9 @@ interface IListing {
   listingId?: string;
 }
 // this is a server component
+export const metadata = {
+  title: 'Listings',
+};
 
 const ListingPage = async ({ params }: { params: IListing }) => {
   const listing = await getListingById(params);

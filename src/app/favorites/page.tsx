@@ -3,6 +3,11 @@ import getCurrentUser from '../actions/getCurrentUser';
 import getFavorites from '../actions/getFavorites';
 import FavoritesClient from './FavoritesClient';
 
+export const metadata = {
+  title: 'Favorites',
+  description: 'My Favorites',
+};
+
 const FavoritesPage = async () => {
   const currentUser = await getCurrentUser();
   const favorites = await getFavorites();

@@ -3,6 +3,10 @@ import getCurrentUser from '../actions/getCurrentUser';
 import getReservations from '../actions/getReservation';
 import ReservationsClient from './ReservationsClient';
 
+export const metadata = {
+  title: 'Reservations',
+};
+
 const ReservationsPage = async () => {
   const currentUser = await getCurrentUser();
 

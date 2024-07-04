@@ -3,6 +3,11 @@ import getCurrentUser from '../actions/getCurrentUser';
 import getListings from '../actions/getListings';
 import ProfilesClient from './ProfilesClient';
 
+export const metadata = {
+  title: 'Profile',
+  description: 'My Profile',
+};
+
 const ProfilesPage = async () => {
   const currentUser = await getCurrentUser();
 
